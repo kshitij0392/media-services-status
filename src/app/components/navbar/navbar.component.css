@@ -1,0 +1,13 @@
+.main-navbar{
+    background-color: #132841;
+    align-items: center !important;
+    height: 58px;
+    color: white;
+}
+.vms-header-logo{
+    margin-left: -10px;
+}
+.header-title{
+    padding : 20px;
+    margin-bottom: 5px;
+}

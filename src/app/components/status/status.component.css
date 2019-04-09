@@ -1,0 +1,44 @@
+.status-section{
+    margin:20px;
+    padding: 20px 15px 15px;
+    background-color: #ffffff;
+    border: 1px solid #dbe1e8;
+}
+
+.mat-tab-label-content{
+    font-size:25px !important;
+}
+
+table {
+    width: 100%;
+    border-style: solid;
+    border-width: 1px;
+    /* margin:5px; */
+    margin: 10px 0px 10px 0px;
+  }
+
+  .services-label{
+    font-size: 15px;
+  }
+
+.table-header-title{
+    font-size:20px;
+}
+  .indicator-icons{
+    height:30px !important;
+    width:30px !important;
+    font-size: 32px;
+  }
+
+.online-icon{
+    color:green !important;
+}
+
+.offline-icon{
+    color:red !important;
+}
+
+.legend-indicator{
+    margin-top: 20px;
+    line-height: 2;
+}
