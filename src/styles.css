@@ -5,4 +5,7 @@ body {
     padding:0;
     margin:0;
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    background-color: #eaedf1;
+    overflow: auto;
+    font-size: 14px;
 }

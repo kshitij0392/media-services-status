@@ -9,6 +9,7 @@ import { MaterialModule} from './material.module';
 import { ContainerComponent } from './components/container/container.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     AppComponent,
     StatusComponent,
     NavbarComponent,
-    ContainerComponent,  
+    ContainerComponent,
+    FooterComponent,  
   ],
   imports: [
     BrowserModule,

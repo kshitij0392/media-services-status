@@ -2,109 +2,171 @@
   <div class="status-section">
     <div class="status-tabs">
       <mat-tab-group mat-align-tabs="center">
-        <mat-tab class="tab-labels" label="Americas">
-          <table mat-table [dataSource]="dataSourceAmericas" class="mat-elevation-z8">
-
-
+        
+        <mat-tab class="tab-labels" label="USA">
+          <table mat-table [dataSource]="dataSourceUSA" class=" mat-elevation-z8">
             <ng-container matColumnDef="productsAndServices">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="table-header-title"> Products and
                   Services </span> </th>
-              <td mat-cell *matCellDef="let element"> <span class="services-label">
-                  {{element.productsAndServices}}</span> </td>
+              <td mat-cell *matCellDef="let element" class="services-table-desc"
+                [class.gray-out-services]="element.headerService ">
+                <span class="services-label"
+                  [class.main-service]="element.headerService">{{element.productsAndServices}}</span>
+              </td>
             </ng-container>
-
 
             <ng-container matColumnDef="eastCoast">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="table-header-title"> East Coast
+              <th class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> <span
+                  class="table-header-title"> East Coast
                 </span> </th>
-              <td mat-cell *matCellDef="let element">
-                <mat-icon class="indicator-icons online-icon" *ngIf="element.eastCoast">done</mat-icon>
-                <mat-icon class="indicator-icons offline-icon" *ngIf="!element.eastCoast">clear</mat-icon>
+              <td class="table-desc" mat-cell *matCellDef="let element" [class.gray-out]="element.headerService">
+                <div *ngIf="!element.headerService">
+                  <mat-icon class="indicator-icons online-icon" matTooltip="Service Running" matTooltipPosition="above"
+                    *ngIf="element.eastCoast =='Running' ">done</mat-icon>
+                  <mat-icon class="indicator-icons offline-icon" matTooltip="Service Stopped" matTooltipPosition="above"
+                    *ngIf="element.eastCoast == 'Stopped'">clear</mat-icon>
+                  <mat-icon class="indicator-icons warning-icon" matTooltip="Service Critical - Needs Attention"
+                    matTooltipPosition="above" *ngIf="element.eastCoast == 'Warning'">warning</mat-icon>
+                </div>
               </td>
             </ng-container>
-
 
             <ng-container matColumnDef="westCoast">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="table-header-title"> West Coast
+              <th class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> <span
+                  class="table-header-title"> West Coast
                 </span> </th>
-              <td mat-cell *matCellDef="let element">
-                <mat-icon color_green class="indicator-icons online-icon" *ngIf="element.westCoast">done</mat-icon>
-                <mat-icon color_red class="indicator-icons offline-icon" *ngIf="!element.westCoast">clear</mat-icon>
-
+              <td class="table-desc" mat-cell *matCellDef="let element" [class.gray-out]="element.headerService ">
+                <div *ngIf="!element.headerService">
+                  <mat-icon class="indicator-icons online-icon" matTooltip="Service Running" matTooltipPosition="above"
+                    *ngIf="element.westCoast == 'Running' ">done</mat-icon>
+                  <mat-icon class="indicator-icons offline-icon" matTooltip="Service Stopped" matTooltipPosition="above"
+                    *ngIf="element.westCoast == 'Stopped' ">clear</mat-icon>
+                  <mat-icon class="indicator-icons warning-icon" matTooltip="Service Critical - Needs Attention"
+                    matTooltipPosition="above" *ngIf="element.westCoast == 'Warning'">warning</mat-icon>
+                </div>
               </td>
             </ng-container>
-
 
             <ng-container matColumnDef="central">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="table-header-title"> Central </span>
+              <th class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> <span
+                  class="table-header-title"> Central </span>
               </th>
-              <td mat-cell *matCellDef="let element">
-                <mat-icon class="indicator-icons online-icon" *ngIf="element.central">done</mat-icon>
-                <mat-icon class="indicator-icons offline-icon" *ngIf="!element.central">clear</mat-icon>
+              <td class="table-desc" mat-cell *matCellDef="let element" [class.gray-out]="element.headerService">
+                <div *ngIf="!element.headerService">
+                  <mat-icon class="indicator-icons online-icon" matTooltip="Service Running" matTooltipPosition="above"
+                    *ngIf="element.central == 'Running' ">done</mat-icon>
+                  <mat-icon class="indicator-icons offline-icon" matTooltip="Service Stopped" matTooltipPosition="above"
+                    *ngIf="element.central == 'Stopped' ">clear</mat-icon>
+                  <mat-icon class="indicator-icons warning-icon" matTooltip="Service Critical - Needs Attention"
+                    matTooltipPosition="above" *ngIf="element.central == 'Warning'">warning</mat-icon>
+                </div>
               </td>
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="americasColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: americasColumns;"></tr>
+            <tr mat-header-row *matHeaderRowDef="usaColumns; sticky:true"></tr>
+            <tr mat-row *matRowDef="let row; columns: usaColumns;"></tr>
           </table>
         </mat-tab>
+
+
         <mat-tab label="Europe">
           <table mat-table [dataSource]="dataSourceEurope" class="mat-elevation-z8">
-
-
             <ng-container matColumnDef="productsAndServices">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="table-header-title"> Products and
                   Services </span> </th>
-              <td mat-cell *matCellDef="let element"> <span class="services-label"> {{element.productsAndServices}}
+              <td mat-cell *matCellDef="let element" [class.gray-out-services]="element.headerService"> <span
+                  [class.main-service]="element.headerService" class="services-label"> {{element.productsAndServices}}
                 </span> </td>
             </ng-container>
 
 
             <ng-container matColumnDef="london">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="table-header-title"> London </span>
+              <th class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> <span
+                  class="table-header-title"> London </span>
               </th>
-              <td mat-cell *matCellDef="let element">
-                <mat-icon class="indicator-icons online-icon" *ngIf="element.london">done</mat-icon>
-                <mat-icon class="indicator-icons offline-icon" *ngIf="!element.london">clear</mat-icon>
+              <td class="table-desc" mat-cell *matCellDef="let element" [class.gray-out]="element.headerService">
+                <div *ngIf="!element.headerService">
+                  <mat-icon class="indicator-icons online-icon" matTooltip="Service Running" matTooltipPosition="above"
+                    *ngIf="element.london == 'Running' ">done</mat-icon>
+                  <mat-icon class="indicator-icons offline-icon" matTooltip="Service Stopped" matTooltipPosition="above"
+                    *ngIf="element.london == 'Stopped' ">clear</mat-icon>
+                  <mat-icon class="indicator-icons warning-icon" matTooltip="Service Critical - Needs Attention"
+                    matTooltipPosition="above" *ngIf="element.london == 'Warning'">warning</mat-icon>
+                </div>
               </td>
             </ng-container>
 
 
             <ng-container matColumnDef="amsterdam">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="table-header-title"> Amsterdam </span>
+              <th class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> <span
+                  class="table-header-title"> Amsterdam </span>
               </th>
-              <td mat-cell *matCellDef="let element">
-                <mat-icon class="indicator-icons online-icon" *ngIf="element.amsterdam">done</mat-icon>
-                <mat-icon class="indicator-icons offline-icon" *ngIf="!element.amsterdam">clear</mat-icon>
+              <td class="table-desc" mat-cell *matCellDef="let element" [class.gray-out]="element.headerService">
+                <div *ngIf="!element.headerService">
+                  <mat-icon class="indicator-icons online-icon" matTooltip="Service Running" matTooltipPosition="above"
+                    *ngIf="element.amsterdam  == 'Running' ">done</mat-icon>
+                  <mat-icon class="indicator-icons offline-icon" matTooltip="Service Stopped" matTooltipPosition="above"
+                    *ngIf="element.amsterdam == 'Stopped' ">clear</mat-icon>
+                  <mat-icon class="indicator-icons warning-icon" matTooltip="Service Critical - Needs Attention"
+                    matTooltipPosition="above" *ngIf="element.amsterdam == 'Warning'">warning</mat-icon>
+                </div>
               </td>
             </ng-container>
 
 
             <ng-container matColumnDef="warsaw">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="table-header-title"> Warsaw </span>
+              <th class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> <span
+                  class="table-header-title"> Warsaw </span>
               </th>
-              <td mat-cell *matCellDef="let element">
-                <mat-icon class="indicator-icons online-icon" *ngIf="element.warsaw">done</mat-icon>
-                <mat-icon class="indicator-icons offline-icon" *ngIf="!element.warsaw">clear</mat-icon>
+              <td class="table-desc" mat-cell *matCellDef="let element" [class.gray-out]="element.headerService">
+                <div *ngIf="!element.headerService">
+                  <mat-icon class="indicator-icons online-icon" matTooltip="Service Running" matTooltipPosition="above"
+                    *ngIf="element.warsaw == 'Running'">done</mat-icon>
+                  <mat-icon class="indicator-icons offline-icon" matTooltip="Service Stopped" matTooltipPosition="above"
+                    *ngIf="element.warsaw == 'Stopped' ">clear</mat-icon>
+                  <mat-icon class="indicator-icons warning-icon" matTooltip="Service Critical - Needs Attention"
+                    matTooltipPosition="above" *ngIf="element.warsaw == 'Warning'">warning</mat-icon>
+                </div>
               </td>
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="europeColumns"></tr>
+            <tr mat-header-row *matHeaderRowDef="europeColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: europeColumns;"></tr>
           </table>
         </mat-tab>
         <!-- <mat-tab label="Third">Content 3</mat-tab> -->
       </mat-tab-group>
     </div>
-    <div class="legend-indicator" fxLayout="column" fxLayoutAlign="start">
-      <div class="online-indicator" fxLayout="row" fxLayoutAlign="start">
-        <mat-icon class="indicator-icons online-icon">done</mat-icon> &nbsp; <span> Service Online and Running </span>
-      </div>
-      <div class="offline-indicator" fxLayout="row" fxLayoutAlign="start">
-        <mat-icon class="indicator-icons offline-icon">clear</mat-icon> &nbsp; <span> Service Offline and Not available
-        </span>
-      </div>
+    <div class="table-footer" fxLayout="row" fxLayoutAlign.lg="space-between">
+      <div class="refresh-section" fxLayout="row">
+          <button mat-flat-button mat-stroked-button matTooltip="Refresh Services Status" matTooltipPosition="above"
+          id="refresh-button"> Refresh Now  <mat-icon> refresh </mat-icon> </button>
+          <div class="refresh-time">
+              <h4>Refresh Every </h4>
+              <mat-form-field class="refresh-setting">
+                <mat-label>Refresh Time</mat-label>
+                <mat-select matTooltip="Select a time interval to refresh services" matTooltipPosition="above">
+                  <mat-option *ngFor="let min of minutes" [value]="min.value">
+                    {{min.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
 
+      </div>
+      <div id="legend" class="legend-indicator" fxLayout="row" fxLayoutAlign="flex-end">
+        <div class="online-indicator" fxLayout="row" fxLayoutAlign="start">
+          <mat-icon class="footer-indicators indicator-icons online-icon">done</mat-icon> <span> Online </span>
+        </div>
+        <div class="offline-indicator" fxLayout="row" fxLayoutAlign="start">
+          <mat-icon class="footer-indicators indicator-icons offline-icon">clear</mat-icon> <span> Error</span>
+        </div>
+        <div class="warning-indicator" fxLayout="row" fxLayoutAlign="start">
+          <mat-icon class="footer-indicators indicator-icons warning-icon">warning</mat-icon> <span> Warning </span>
+        </div>
+
+      </div>
     </div>
+
   </div>
 </section>
