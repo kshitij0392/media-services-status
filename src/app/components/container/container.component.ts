@@ -12,12 +12,11 @@ export class ContainerComponent implements OnInit {
   public innerWidth: any;
 
   onResize(event) {
-    console.log('Did it Hit ?');
-   // event.target.innerWidth;
-  //  this.innerWidth =  event.target.innerWidth;
+    document.getElementById('page-container').setAttribute("style","height:"+window.innerHeight+"px");
+
   }
   ngOnInit() {
-    this.innerWidth = window.innerWidth;
+    document.getElementById('page-container').setAttribute("style","height:"+window.innerHeight+"px");
   }
 
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, HostListener } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
+import { DataService } from 'src/app/services/data.service';
 
 export interface StatusTable {
   productsAndServices : String;
@@ -68,18 +69,23 @@ export interface RefreshTime {
   viewValue: string;
 }
 
-
 @Component({
   selector: 'app-status',
   templateUrl: './status.component.html',
   styleUrls: ['./status.component.css'],
   encapsulation: ViewEncapsulation.None
 })
+@HostListener('window:resize', ['$event'])
 export class StatusComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService : DataService) { }
+
+  refreshInterval : any;
   usaColumns : String [] = ['productsAndServices', 'eastCoast', 'westCoast', 'central'];
   europeColumns : String [] = ['productsAndServices', 'london', 'amsterdam', 'warsaw'];
+  
+  //dataSourceUSA :any ;
+//  dataSourceUSA : MatTableDataSource<StatusTable>[];
   dataSourceUSA = new MatTableDataSource(STATUS_DATA_USA);
   dataSourceEurope = new MatTableDataSource(STATUS_DATA_EUROPE);
   minutes: RefreshTime[] = [
@@ -89,7 +95,39 @@ export class StatusComponent implements OnInit {
     {value: 8, viewValue: '8 Minutes'},
     {value: 10, viewValue:'10 Minutes'}
   ];
+
+  getServiceStatus () {
+
+    console.log(this.refreshInterval, 'refresh Interval');
+    let statusUSA : StatusTable [] = [
+      { productsAndServices : "Transcoding & Deliver",  eastCoast : null, westCoast: null, central : null, headerService : true},
+      { productsAndServices : "Process Manager",  eastCoast : null, westCoast: null, central : null, headerService : true},
+      { productsAndServices : "Search Service",  eastCoast : null, westCoast: null, central : null, headerService : true},
+      { productsAndServices : "Storage Service",  eastCoast : null, westCoast: null, central : null, headerService : true}
+    ];
+
+    this.dataService.getServiceStatus()
+    .then((data:any)=> {
+      console.log(data, 'this is the data')
+      data.forEach(element => {
+        if (element.Display_Name === 'CTP Service' || element.Display_Name === 'CTP WEB Service'){
+          statusUSA.splice (1,0, {productsAndServices : element.Display_Name,  eastCoast : element.Status, westCoast: null, central : null, headerService : false });
+        }
+        else if (element.Display_Name === 'Viacom PROD Process Manager') {
+          statusUSA.splice (2,0, {productsAndServices : element.Display_Name,  eastCoast : element.Status, westCoast: null, central : null, headerService : false });
+        } else {
+          statusUSA.push ({productsAndServices : element.Display_Name,  eastCoast : element.Status, westCoast: null, central : null, headerService : false });
+        }
+       
+      });
+     // this.dataSourceUSA = new MatTableDataSource(statusUSA);
+      console.log(this.dataSourceUSA);
+      
+    })
+  }
+
   ngOnInit() {
+    this.getServiceStatus();
   }
 
 }

@@ -21,6 +21,7 @@
                 </span> </th>
               <td class="table-desc" mat-cell *matCellDef="let element" [class.gray-out]="element.headerService">
                 <div *ngIf="!element.headerService">
+                  <!-- <span> {{element.eastCoast}}</span> -->
                   <mat-icon class="indicator-icons online-icon" matTooltip="Service Running" matTooltipPosition="above"
                     *ngIf="element.eastCoast =='Running' ">done</mat-icon>
                   <mat-icon class="indicator-icons offline-icon" matTooltip="Service Stopped" matTooltipPosition="above"
@@ -140,12 +141,12 @@
     <div class="table-footer" fxLayout="row" fxLayoutAlign.lg="space-between">
       <div class="refresh-section" fxLayout="row">
           <button mat-flat-button mat-stroked-button matTooltip="Refresh Services Status" matTooltipPosition="above"
-          id="refresh-button"> Refresh Now  <mat-icon> refresh </mat-icon> </button>
+          id="refresh-button" (click)="getServiceStatus()"> Refresh Now  <mat-icon> refresh </mat-icon> </button>
           <div class="refresh-time">
               <h4>Refresh Every </h4>
               <mat-form-field class="refresh-setting">
                 <mat-label>Refresh Time</mat-label>
-                <mat-select matTooltip="Select a time interval to refresh services" matTooltipPosition="above">
+                <mat-select matTooltip="Select a time interval to refresh services" matTooltipPosition="above" [(ngModel)]="refreshInterval">
                   <mat-option *ngFor="let min of minutes" [value]="min.value">
                     {{min.viewValue}}
                   </mat-option>
